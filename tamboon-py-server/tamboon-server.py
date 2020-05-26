@@ -7,6 +7,7 @@ from flask_restful import Api
 
 from charities import Charities
 from donations import Donations
+from chargeoperation import ChargeOperation
 
 secret_key = ''
 public_key = ''
@@ -51,6 +52,7 @@ def start_server():
 
 def main(argv):
      parse_keys(argv)
+     ChargeOperation.Instance().set_secret_key(secret_key)
      start_server()
 
 if __name__ == '__main__':
