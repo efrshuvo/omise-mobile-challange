@@ -20,3 +20,4 @@ $ source venv/bin/activate
 $ pip install flask flask-jsonpify flask-restful omise
 $ python -s <secret key> -p <public key> --port <server port>
 ```
+Default server port is 8088
