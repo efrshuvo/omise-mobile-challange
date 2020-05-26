@@ -1,5 +1,4 @@
 .DS_Store
 .idea/
-charities.pyc
-donations.pyc
+*.pyc
 models.pyc
