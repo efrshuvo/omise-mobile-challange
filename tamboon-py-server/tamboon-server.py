@@ -27,19 +27,27 @@ def parse_keys(argv):
      global secret_key, public_key, host_port
      try:
           opts, args = getopt.getopt(argv, "hs:p:", ["skey=", "pkey=","port="])
+          if len(opts) > 0:
+               for opt, arg in opts:
+                    if opt == '-h':
+                         print 'tamboon-server.py -s <secret key> -p <public key> --port <server port>'
+                         sys.exit()
+                    elif opt in ("-s", "--skey"):
+                         secret_key = arg
+                    elif opt in ("-p", "--pkey"):
+                         public_key = arg
+                    elif opt in ("--port"):
+                         host_port = arg
+          else:
+               print 'tamboon-server.py -s <secret key> -p <public key> --port <server port>'
+               exit(2)
+          if secret_key == '':
+               print 'Please at least use -s option to set the secret key'
+               print 'tamboon-server.py -s <secret key> -p <public key> --port <server port>'
+               exit(2)
      except getopt.GetoptError:
           print 'tamboon-server.py -s <secret key> -p <public key> --port <server port>'
-          sys.exit(2)
-     for opt, arg in opts:
-          if opt == '-h':
-               print 'tamboon-server.py -s <secret key> -p <public key> --port <server port>'
-               sys.exit()
-          elif opt in ("-s", "--skey"):
-               secret_key = arg
-          elif opt in ("-p", "--pkey"):
-               public_key = arg
-          elif opt in ("--port"):
-               host_port = arg
+          exit(2)
 
 def start_server():
      host_ip = get_host()
