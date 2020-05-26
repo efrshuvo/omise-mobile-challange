@@ -17,7 +17,6 @@ host_port = '8088'
 
 def get_host():
      hostname = socket.gethostname()
-     ## getting the IP address using socket.gethostbyname() method
      ip_address = socket.gethostbyname(hostname)
      ## printing the hostname and ip_address
      # print "Hostname: " + hostname
@@ -29,11 +28,11 @@ def parse_keys(argv):
      try:
           opts, args = getopt.getopt(argv, "hs:p:", ["skey=", "pkey=","port="])
      except getopt.GetoptError:
-          print 'tamboon-server.py -s <secret key> -p <public key>'
+          print 'tamboon-server.py -s <secret key> -p <public key> --port <server port>'
           sys.exit(2)
      for opt, arg in opts:
           if opt == '-h':
-               print 'tamboon-server.py -s <secret key> -p <public key>'
+               print 'tamboon-server.py -s <secret key> -p <public key> --port <server port>'
                sys.exit()
           elif opt in ("-s", "--skey"):
                secret_key = arg
