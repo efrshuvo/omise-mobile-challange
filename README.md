@@ -18,5 +18,5 @@ Currently only two api endpoint has been developed.
 $ virtualenv venv
 $ source venv/bin/activate
 $ pip install flask flask-jsonpify flask-restful omise
-$ python tamboon-server.py
+$ python -s <secret key> -p <public key> --port <server port>
 ```
