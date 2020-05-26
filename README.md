@@ -13,9 +13,10 @@ Currently only two api endpoint has been developed.
 4. flask-restful
 5. omnise
 
-#### Installation
+#### Installation and execution
 ```sh
 $ virtualenv venv
 $ source venv/bin/activate
 $ pip install flask flask-jsonpify flask-restful omise
+$ python tamboon-server.py
 ```
