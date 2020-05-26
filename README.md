@@ -1,4 +1,4 @@
-# omise-mobile-challange
+# Omise-mobile-challange
 This repo contains code both for a donation server and a mobile client applicaition. Both server and client application uses omnise api/sdk to process online paayment.
 
 ## Tamboon server
@@ -18,5 +18,6 @@ Currently only two api endpoint has been developed.
 $ virtualenv venv
 $ source venv/bin/activate
 $ pip install flask flask-jsonpify flask-restful omise
-$ python tamboon-server.py
+$ python -s <secret key> -p <public key> --port <server port>
 ```
+Default server port is 8088
