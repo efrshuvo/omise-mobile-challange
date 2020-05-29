@@ -1,5 +1,5 @@
 # Omise-mobile-challange
-This repo contains code both for a donation server and a mobile client applicaition. Both server and client application uses omnise api/sdk to process online paayment.This code are basically for the response of this : https://github.com/omise/challenges/tree/challenge-mobile
+This repo contains code both for a donation server and a mobile client applicaition. Both server and client application uses omnise api/sdk to process online paayment. This codes are basically for the response of this : https://github.com/omise/challenges/tree/challenge-mobile
 
 ## Tamboon server
 Currently only two api endpoint has been developed.
