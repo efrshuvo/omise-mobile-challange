@@ -13,11 +13,23 @@ Currently only two api endpoint has been developed.
 4. flask-restful
 5. omnise
 
-#### Installation and execution
+#### Installation
 ```sh
 $ virtualenv venv
 $ source venv/bin/activate
-$ pip install flask flask-jsonpify flask-restful omise
-$ python -s <secret key> -p <public key> --port <server port>
+$ pip install flask flask-jsonpify flask-restful omise gunicorn
 ```
-Default server port is 8088
+
+### Execution
+
+At first need to set omise secrate key.
+```sh
+$ export OMISE_SKEY=<Secret Key>
+```
+
+Now execute the applicaiton by using the following command:
+```sh
+$ gunicorn tamboon-server:app
+```
+
+
