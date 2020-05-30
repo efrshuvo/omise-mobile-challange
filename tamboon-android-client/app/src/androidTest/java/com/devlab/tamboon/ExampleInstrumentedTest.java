@@ -1,4 +1,4 @@
-package com.example.tamboon;
+package com.devlab.tamboon;
 
 import android.content.Context;
 

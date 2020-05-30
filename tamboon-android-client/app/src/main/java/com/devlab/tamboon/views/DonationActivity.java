@@ -1,10 +1,10 @@
-package com.example.tamboon.views;
+package com.devlab.tamboon.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.tamboon.R;
+import com.devlab.tamboon.R;
 
 public class DonationActivity extends AppCompatActivity {
 
