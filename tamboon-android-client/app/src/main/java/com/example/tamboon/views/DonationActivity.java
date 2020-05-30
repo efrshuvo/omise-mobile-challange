@@ -1,14 +1,16 @@
-package com.example.tamboon;
+package com.example.tamboon.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.tamboon.R;
+
+public class DonationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_donation);
     }
 }
