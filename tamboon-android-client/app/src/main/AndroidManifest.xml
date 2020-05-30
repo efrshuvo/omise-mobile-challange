@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.devlab.tamboon.views.DonationActivity"></activity>
-        <activity android:name="com.devlab.tamboon.views.SettingsActivity" />
+        <activity android:name="com.devlab.tamboon.views.DonationResultActivity" />
         <activity android:name="com.devlab.tamboon.views.CharityListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

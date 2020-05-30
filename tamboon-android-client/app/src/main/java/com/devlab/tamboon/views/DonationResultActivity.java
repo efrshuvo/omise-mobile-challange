@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.devlab.tamboon.R;
 
-public class SettingsActivity extends AppCompatActivity {
+public class DonationResultActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
