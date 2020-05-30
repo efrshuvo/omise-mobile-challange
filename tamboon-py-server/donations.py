@@ -8,11 +8,7 @@ class Donations(Resource):
         donation_data = request.get_json(force=True) # return dict
         charge = ChargeOperation.Instance().create_charge(donation_data)
         if isinstance(charge,omise.Charge):
-            return jsonify({"success":"true"})
-        return jsonify({"success":"false","message":charge.message})
-
-
-
-
+            return jsonify({"success":True,"message":"Donation completed"})
+        return jsonify({"success":False,"message":charge.message})
 
 
