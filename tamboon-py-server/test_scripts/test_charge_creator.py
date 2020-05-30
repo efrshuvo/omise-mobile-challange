@@ -1,8 +1,8 @@
+import os
 import omise
-import json
 
 def create_charge():
-    omise.api_secret = "skey_test_5jy4os10m5wgcb4tp6t"
+    omise.api_secret = os.getenv("OMISE_SKEY")
     charge = None
     try:
         charge = omise.Charge.create(
