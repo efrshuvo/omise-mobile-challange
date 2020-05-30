@@ -1,8 +1,9 @@
+import os
 import omise
 
 
 def create_token():
-    omise.api_public = "pkey_test_5jy4os10d58ajewqsb4"
+    omise.api_public = os.getenv("OMISE_PKEY")
 
     token = omise.Token.create(
         name="Somchai Prasert",
