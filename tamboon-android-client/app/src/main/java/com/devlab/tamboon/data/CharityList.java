@@ -1,10 +1,10 @@
-package com.devlab.tamboon.models;
+package com.devlab.tamboon.data;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Charities {
+public class CharityList {
 
     @SerializedName("data")
     @Expose

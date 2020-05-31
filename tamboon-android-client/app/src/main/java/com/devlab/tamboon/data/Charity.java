@@ -1,4 +1,4 @@
-package com.devlab.tamboon.models;
+package com.devlab.tamboon.data;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,4 +1,4 @@
-package com.devlab.tamboon.models;
+package com.devlab.tamboon.data;
 
 public class Donation {
 
@@ -6,6 +6,12 @@ public class Donation {
     private String token;
     private Integer amount;
 
+
+    public Donation(String name,String token, Integer amount){
+        this.name = name;
+        this.token = token;
+        this.amount = amount;
+    }
     public String getName() {
         return name;
     }

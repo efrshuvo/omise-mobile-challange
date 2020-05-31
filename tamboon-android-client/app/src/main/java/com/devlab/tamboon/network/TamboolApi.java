@@ -1,8 +1,8 @@
 package com.devlab.tamboon.network;
 
-import com.devlab.tamboon.models.CharityList;
-import com.devlab.tamboon.models.Donation;
-import com.devlab.tamboon.models.DonationResult;
+import com.devlab.tamboon.data.CharityList;
+import com.devlab.tamboon.data.Donation;
+import com.devlab.tamboon.data.DonationResult;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
