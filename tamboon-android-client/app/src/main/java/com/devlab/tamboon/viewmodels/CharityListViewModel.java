@@ -1,7 +1,7 @@
 package com.devlab.tamboon.viewmodels;
 
 import com.devlab.tamboon.data.CharityListResponse;
-import com.devlab.tamboon.repositories.CharityListRepository;
+import com.devlab.tamboon.repositories.TamboonRemoteRepository;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -9,20 +9,20 @@ import androidx.lifecycle.ViewModel;
 public class CharityListViewModel extends ViewModel {
 
     private MutableLiveData<CharityListResponse> charityListLiveData;
-    private CharityListRepository charityListRepository;
+    private TamboonRemoteRepository tamboonRemoteRepository;
 
-    public CharityListViewModel(CharityListRepository charityListRepository){
-        this.charityListRepository = charityListRepository;
+    public CharityListViewModel(TamboonRemoteRepository tamboonRemoteRepository){
+        this.tamboonRemoteRepository = tamboonRemoteRepository;
         charityListLiveData = new MutableLiveData<>();
-        this.charityListRepository.getCharityList().observeForever(charityListResponse -> {
+        this.tamboonRemoteRepository.getCharities().observeForever(charityListResponse -> {
             charityListLiveData.setValue(charityListResponse);
         });
     }
 
-    public void requestCharityList(){
-        charityListRepository.sendRequest();
+    public void requestingCharityList(){
+        tamboonRemoteRepository.askingCharities();
     }
-    public MutableLiveData<CharityListResponse> getCharities(){
+    public MutableLiveData<CharityListResponse> getCharityList(){
         return charityListLiveData;
     }
 }

@@ -1,27 +1,27 @@
 package com.devlab.tamboon.factory;
 
-import com.devlab.tamboon.repositories.CharityListRepository;
+import com.devlab.tamboon.repositories.TamboonRemoteRepository;
 import com.devlab.tamboon.viewmodels.CharityListViewModel;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-public class CharityListViewModelFactory implements ViewModelProvider.Factory {
+public class CharityListViewModelFactory implements ViewModelProvider.Factory{
 
-    private CharityListRepository charityListRepository;
+    private TamboonRemoteRepository tamboonRemoteRepository;
 
-    public CharityListViewModelFactory(CharityListRepository charityListRepository){
-        this.charityListRepository = charityListRepository;
+    public CharityListViewModelFactory(TamboonRemoteRepository tamboonRemoteRepository){
+        this.tamboonRemoteRepository = tamboonRemoteRepository;
     }
 
     @NonNull
     @Override
+    @SuppressWarnings("unchecked")
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.isAssignableFrom(CharityListViewModel.class)) {
-            return (T) new CharityListViewModel(charityListRepository);
+            return (T) new CharityListViewModel(tamboonRemoteRepository);
         }
-        //noinspection unchecked
         throw new IllegalArgumentException("Unknown ViewModel class");
     }
 }

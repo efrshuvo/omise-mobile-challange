@@ -12,13 +12,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.devlab.tamboon.R;
 import com.devlab.tamboon.adapter.CharityListAdapter;
 import com.devlab.tamboon.data.Charity;
 import com.devlab.tamboon.databinding.ActivityCharityListBinding;
 import com.devlab.tamboon.factory.CharityListViewModelFactory;
 import com.devlab.tamboon.network.RetrofitService;
-import com.devlab.tamboon.repositories.CharityListRepository;
+import com.devlab.tamboon.repositories.TamboonRemoteRepository;
 import com.devlab.tamboon.viewmodels.CharityListViewModel;
 
 import java.util.ArrayList;
@@ -28,8 +27,7 @@ public class CharityListActivity extends AppCompatActivity {
     private CharityListAdapter charityListAdapter;
     private CharityListViewModel charityListViewModel;
     private CharityListViewModelFactory charityListViewModelFactory;
-    private CharityListRepository charityListRepository;
-    private RetrofitService retrofitService;
+    private TamboonRemoteRepository tamboonRemoteRepository;
     private ArrayList<Charity> charityList;
 
     private ActivityCharityListBinding binding;
@@ -56,7 +54,7 @@ public class CharityListActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 if(charityListViewModel != null) {
-                    charityListViewModel.requestCharityList();
+                    charityListViewModel.requestingCharityList();
                 }
             }
         });
@@ -85,15 +83,14 @@ public class CharityListActivity extends AppCompatActivity {
     }
 
     private void initViewModel() {
-        retrofitService = RetrofitService.getInstance();
-        charityListRepository = new CharityListRepository(retrofitService);
-        charityListViewModelFactory = new CharityListViewModelFactory(charityListRepository);
+        tamboonRemoteRepository = TamboonRemoteRepository.getInstance(RetrofitService.getInstance());
+        charityListViewModelFactory = new CharityListViewModelFactory(tamboonRemoteRepository);
         charityListViewModel = ViewModelProviders.of(this,charityListViewModelFactory).get(CharityListViewModel.class);
-        charityListViewModel.requestCharityList();
+        charityListViewModel.requestingCharityList();
     }
 
     private void configureCharityListObserver(){
-        charityListViewModel.getCharities().observe(this, charityListResponse->{
+        charityListViewModel.getCharityList().observe(this, charityListResponse->{
             Throwable throwable = charityListResponse.getThrowable();
             if( throwable == null){
                 charityList.clear();

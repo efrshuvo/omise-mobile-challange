@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-//import com.bumptech.glide.Glide;
-import com.bumptech.glide.Glide;
 import com.devlab.tamboon.R;
 import com.devlab.tamboon.data.Charity;
 import com.devlab.tamboon.databinding.CharityListItemBinding;
