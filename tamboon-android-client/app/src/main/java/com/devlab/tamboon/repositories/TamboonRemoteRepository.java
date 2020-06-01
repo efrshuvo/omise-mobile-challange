@@ -23,6 +23,7 @@ public class TamboonRemoteRepository {
     private TamboonRemoteRepository(){
 
         charityListResponseMutableLiveData = new MutableLiveData<>();
+        donationResponseMutableLiveData = new MutableLiveData<>();
         tamboolApi = TamboonRemoteRepository.retrofitService.create(TamboolApi.class);
     }
 
@@ -64,6 +65,10 @@ public class TamboonRemoteRepository {
                 donationResponseMutableLiveData.setValue(new DonationResponse(null,t));
             }
         });
+    }
+
+    public MutableLiveData<DonationResponse> getDonationResponse() {
+        return donationResponseMutableLiveData;
     }
 
     public MutableLiveData<CharityListResponse> getCharities(){
