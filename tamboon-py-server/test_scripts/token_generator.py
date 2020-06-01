@@ -10,9 +10,9 @@ def create_token():
         number="4242424242424242",
         expiration_month=10,
         expiration_year=2022,
-        city="Bangkok",
-        postal_code="10320",
-        security_code=123,
+        # city="Bangkok",
+        # postal_code="10320",
+        # security_code=123,
     )
     return token
 
