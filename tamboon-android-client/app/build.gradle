@@ -8,6 +8,8 @@ android {
         applicationId "com.example.tamboon"
         minSdkVersion 16
         targetSdkVersion 28
+        multiDexEnabled true
+
         versionCode 1
         versionName "1.0"
 
@@ -53,6 +55,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation 'co.omise:omise-android:3.1.0'
 
     testImplementation 'junit:junit:4.12'
     // Test helpers for LiveData
