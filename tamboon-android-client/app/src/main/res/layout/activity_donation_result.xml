@@ -35,7 +35,7 @@
         android:id="@+id/bt_dismiss"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dismiss"
+        android:text="@string/dismiss"
         style="@style/OmiseButton"
         android:onClick="onDismisClick"
         android:layout_marginHorizontal="16dp"

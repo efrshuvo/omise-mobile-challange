@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TamBoon</string>
+    <string name="app_name">Tamboon</string>
     <string name="amount">Amount</string>
     <string name="enter_card_number">Enter card number</string>
     <string name="mm_yy">MM/YY</string>
@@ -14,4 +14,5 @@
     <string name="invalid_inputs">Invalid inputs !!!</string>
     <string name="payment_success">Payment successful</string>
     <string name="thanks_message">Thank you for you %1s thb donation.</string>
+    <string name="dismiss">Dismiss</string>
 </resources>
