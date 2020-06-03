@@ -67,13 +67,40 @@ public class DonationActivity extends AppCompatActivity {
         tvCharityName = donationBinding.donationCharityName;
 
         etAmount = donationBinding.etDonationAmount;
+        etAmount.setOnFocusChangeListener((v, hasFocus) -> {
+            if(!hasFocus){
+                updateEditTextBackground(etAmount);
+            }
+        });
         etCreditCard = donationBinding.etCardNumber;
+        etCreditCard.setOnFocusChangeListener((v, hasFocus) -> {
+            if(!hasFocus){
+                updateEditTextBackground(etCreditCard);
+            }
+        });
         etExpiryDate = donationBinding.etCardExpiryDate;
+        etExpiryDate.setOnFocusChangeListener((v, hasFocus) -> {
+            if(!hasFocus){
+                updateEditTextBackground(etExpiryDate);
+            }
+        });
         etSecurityCode = donationBinding.etCardSecurityCode;
+        etSecurityCode.setOnFocusChangeListener((v, hasFocus) -> {
+            if(!hasFocus){
+                updateEditTextBackground(etSecurityCode);
+            }
+        });
         etCardName = donationBinding.etCardHolderName;
+        etCardName.setOnFocusChangeListener((v, hasFocus) -> {
+            if(!hasFocus){
+                updateEditTextBackground(etCardName);
+            }
+        });
         tvInputError = donationBinding.tvInputError;
         pbMakeDonation = donationBinding.pbMakeDonation;
     }
+
+
 
 
     private void initViewModel(){
@@ -115,24 +142,32 @@ public class DonationActivity extends AppCompatActivity {
     }
 
     public void onPayment(View view) {
-        updateEditTextsBackground();
+        updateEditTextBackground(etAmount);
+        updateEditTextBackground(etCreditCard);
+        updateEditTextBackground(etExpiryDate);
+        updateEditTextBackground(etSecurityCode);
+        updateEditTextBackground(etCardName);
+        requestToGenerateToken();
+    }
 
-        if(!etAmount.isValid()){
-            updateEditTextErrorBackground(etAmount);
+    private void updateEditTextErrorBackground(OmiseEditText editText){
+        if(!editText.isValid()) {
+            editText.setBackgroundResource(R.drawable.bg_error_field_outlined);
+            tvInputError.setVisibility(View.VISIBLE);
         }
-        if(!etCreditCard.isValid()){
-            updateEditTextErrorBackground(etCreditCard);
-        }
-        if(!etExpiryDate.isValid()){
-            updateEditTextErrorBackground(etExpiryDate);
-        }
-        if(!etSecurityCode.isValid()){
-            updateEditTextErrorBackground(etSecurityCode);
-        }
-        if(!etCardName.isValid()){
-            updateEditTextErrorBackground(etCardName);
-        }
+    }
 
+    private void updateEditTextBackground(OmiseEditText editText){
+        if(editText.isValid()) {
+            tvInputError.setVisibility(View.GONE);
+            editText.setBackgroundResource(R.drawable.bg_edit_text_outlined);
+        }else{
+            updateEditTextErrorBackground(editText);
+        }
+    }
+
+
+    private void requestToGenerateToken(){
         if(tvInputError.getVisibility() == View.GONE){
             showProgressSpinner();
             donationViewModel.generateToken(new CardParam(etCardName.getCardName(),
@@ -142,23 +177,10 @@ public class DonationActivity extends AppCompatActivity {
         }
     }
 
-    private void updateEditTextErrorBackground(OmiseEditText editText){
-        editText.setBackgroundResource(R.drawable.bg_error_field_outlined);
-        tvInputError.setVisibility(View.VISIBLE);
-    }
-    private void updateEditTextsBackground(){
-        tvInputError.setVisibility(View.GONE);
-        etAmount.setBackgroundResource(R.drawable.bg_edit_text_outlined);
-        etCreditCard.setBackgroundResource(R.drawable.bg_edit_text_outlined);
-        etExpiryDate.setBackgroundResource(R.drawable.bg_edit_text_outlined);
-        etSecurityCode.setBackgroundResource(R.drawable.bg_edit_text_outlined);
-        etCardName.setBackgroundResource(R.drawable.bg_edit_text_outlined);
-    }
-
-
     private void showMessage(String message){
         Toast.makeText(this,message,Toast.LENGTH_LONG).show();
     }
+
 
     private void goToResultPage(){
         Intent intent = new Intent(this, DonationResultActivity.class);
