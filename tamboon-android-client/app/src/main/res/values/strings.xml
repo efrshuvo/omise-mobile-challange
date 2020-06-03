@@ -6,4 +6,12 @@
     <string name="security">CVC/CVV</string>
     <string name="card_holder_name">Card Holder Name</string>
     <string name="pay">Pay</string>
+    <string name="placeholder">Placeholder</string>
+    <string name="visa_logo">Showing visa logo</string>
+    <string name="master_card_logo">Showing master card logo</string>
+    <string name="amex_logo">Showing amex logo</string>
+    <string name="charity_logo">Showing company logo</string>
+    <string name="invalid_inputs">Invalid inputs !!!</string>
+    <string name="payment_success">Payment successful</string>
+    <string name="thanks_message">Thank you for you %1s thb donation.</string>
 </resources>
