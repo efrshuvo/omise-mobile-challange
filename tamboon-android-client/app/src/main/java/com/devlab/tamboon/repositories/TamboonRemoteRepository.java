@@ -15,28 +15,18 @@ import retrofit2.Response;
 
 public class TamboonRemoteRepository {
 
-    private static RetrofitService retrofitService;
     private MutableLiveData<CharityListResponse> charityListResponseMutableLiveData ;
     private MutableLiveData<DonationResponse> donationResponseMutableLiveData ;
     private TamboolApi tamboolApi;
 
-    private TamboonRemoteRepository(){
+    public  TamboonRemoteRepository(RetrofitService retrofitService){
 
         charityListResponseMutableLiveData = new MutableLiveData<>();
         donationResponseMutableLiveData = new MutableLiveData<>();
-        tamboolApi = TamboonRemoteRepository.retrofitService.create(TamboolApi.class);
+        tamboolApi = retrofitService.create(TamboolApi.class);
     }
 
-    private static class  InstanceHelper{
 
-        private static final TamboonRemoteRepository REPOSITORY_INSTANCE = new TamboonRemoteRepository();
-
-    }
-
-    public static TamboonRemoteRepository getInstance(RetrofitService retrofitService){
-        TamboonRemoteRepository.retrofitService = retrofitService;
-        return InstanceHelper.REPOSITORY_INSTANCE;
-    }
 
     public void askingCharities(){
         tamboolApi.getCharityList().enqueue(new Callback<CharityList>() {

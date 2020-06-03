@@ -83,7 +83,7 @@ public class CharityListActivity extends AppCompatActivity {
     }
 
     private void initViewModel() {
-        tamboonRemoteRepository = TamboonRemoteRepository.getInstance(RetrofitService.getInstance());
+        tamboonRemoteRepository = new TamboonRemoteRepository(RetrofitService.getInstance());
         charityListViewModelFactory = new CharityListViewModelFactory(tamboonRemoteRepository);
         charityListViewModel = ViewModelProviders.of(this,charityListViewModelFactory).get(CharityListViewModel.class);
         charityListViewModel.requestingCharityList();

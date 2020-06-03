@@ -47,7 +47,6 @@ public class DonationActivity extends AppCompatActivity {
     private TamboonRemoteRepository tamboonRemoteRepository;
     private DonationViewModelFactory donationViewModelFactory;
     private DonationViewModel donationViewModel;
-    private boolean isPageTransactionStarted;
 
 
     @Override
@@ -61,7 +60,6 @@ public class DonationActivity extends AppCompatActivity {
         Intent intent = getIntent();
         donationViewModel.setCharityName(intent.getStringExtra("name"));
         donationViewModel.setCharityLogoUrl(intent.getStringExtra("logoUrl"));
-        isPageTransactionStarted = false;
     }
 
     private void initView(){
@@ -79,7 +77,7 @@ public class DonationActivity extends AppCompatActivity {
 
 
     private void initViewModel(){
-        tamboonRemoteRepository = TamboonRemoteRepository.getInstance(RetrofitService.getInstance());
+        tamboonRemoteRepository = new TamboonRemoteRepository(RetrofitService.getInstance());
         donationViewModelFactory = new DonationViewModelFactory(tamboonRemoteRepository);
         donationViewModel = ViewModelProviders.of(this,donationViewModelFactory).get(DonationViewModel.class);
     }
@@ -166,8 +164,8 @@ public class DonationActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DonationResultActivity.class);
         intent.putExtra("donation-amount",etAmount.getAmount());
         startActivity(intent);
-        //finish();
-        //isPageTransactionStarted = true;
+        finish();
+
     }
 
     private void showProgressSpinner(){
@@ -175,7 +173,7 @@ public class DonationActivity extends AppCompatActivity {
     }
 
     private void hideProgressSpinner(){
-        pbMakeDonation.setVisibility(View.VISIBLE);
+        pbMakeDonation.setVisibility(View.GONE);
     }
 
 
