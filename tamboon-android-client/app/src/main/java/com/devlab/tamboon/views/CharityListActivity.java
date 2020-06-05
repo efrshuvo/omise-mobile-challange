@@ -1,11 +1,15 @@
 package com.devlab.tamboon.views;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.test.espresso.IdlingResource;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +22,7 @@ import com.devlab.tamboon.databinding.ActivityCharityListBinding;
 import com.devlab.tamboon.factory.CharityListViewModelFactory;
 import com.devlab.tamboon.network.RetrofitService;
 import com.devlab.tamboon.repositories.TamboonRemoteRepository;
+import com.devlab.tamboon.utility.TamboonIdlingResource;
 import com.devlab.tamboon.viewmodels.CharityListViewModel;
 
 import java.util.ArrayList;
@@ -29,6 +34,9 @@ public class CharityListActivity extends AppCompatActivity {
     private CharityListViewModelFactory charityListViewModelFactory;
     private TamboonRemoteRepository tamboonRemoteRepository;
     private ArrayList<Charity> charityList;
+    // The Idling Resource which will be null in production.
+    @Nullable
+    private TamboonIdlingResource tamboonIdlingResource;
 
     private ActivityCharityListBinding binding;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -107,5 +115,14 @@ public class CharityListActivity extends AppCompatActivity {
 
     private void showLoadingErrorMessage(Throwable t){
         Toast.makeText(this,t.getMessage().toString(),Toast.LENGTH_LONG).show();
+    }
+
+    @VisibleForTesting
+    @NonNull
+    public IdlingResource getIdlingResource() {
+        if (tamboonIdlingResource == null) {
+            tamboonIdlingResource = new TamboonIdlingResource();
+        }
+        return tamboonIdlingResource;
     }
 }
