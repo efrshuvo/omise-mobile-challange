@@ -13,6 +13,7 @@ import co.omise.android.ui.SecurityCodeEditText;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -54,6 +55,7 @@ public class DonationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         donationBinding = ActivityDonationBinding.inflate(getLayoutInflater());
         setContentView(donationBinding.getRoot());
+        Log.d("Donation","Donation form");
         initView();
         initViewModel();
         configureDonationObserver();
@@ -68,31 +70,31 @@ public class DonationActivity extends AppCompatActivity {
 
         etAmount = donationBinding.etDonationAmount;
         etAmount.setOnFocusChangeListener((v, hasFocus) -> {
-            if(!hasFocus){
-                updateEditTextBackground(etAmount);
+            if(!hasFocus && tvInputError.getVisibility() == View.VISIBLE){
+                    updateEditTextBackground(etAmount);
             }
         });
         etCreditCard = donationBinding.etCardNumber;
         etCreditCard.setOnFocusChangeListener((v, hasFocus) -> {
-            if(!hasFocus){
+            if(!hasFocus && tvInputError.getVisibility() == View.VISIBLE){
                 updateEditTextBackground(etCreditCard);
             }
         });
         etExpiryDate = donationBinding.etCardExpiryDate;
         etExpiryDate.setOnFocusChangeListener((v, hasFocus) -> {
-            if(!hasFocus){
+            if(!hasFocus && tvInputError.getVisibility() == View.VISIBLE){
                 updateEditTextBackground(etExpiryDate);
             }
         });
         etSecurityCode = donationBinding.etCardSecurityCode;
         etSecurityCode.setOnFocusChangeListener((v, hasFocus) -> {
-            if(!hasFocus){
+            if(!hasFocus && tvInputError.getVisibility() == View.VISIBLE){
                 updateEditTextBackground(etSecurityCode);
             }
         });
         etCardName = donationBinding.etCardHolderName;
         etCardName.setOnFocusChangeListener((v, hasFocus) -> {
-            if(!hasFocus){
+            if(!hasFocus && tvInputError.getVisibility() == View.VISIBLE){
                 updateEditTextBackground(etCardName);
             }
         });
@@ -159,10 +161,22 @@ public class DonationActivity extends AppCompatActivity {
 
     private void updateEditTextBackground(OmiseEditText editText){
         if(editText.isValid()) {
-            tvInputError.setVisibility(View.GONE);
+            hideErrorText();
             editText.setBackgroundResource(R.drawable.bg_edit_text_outlined);
         }else{
             updateEditTextErrorBackground(editText);
+        }
+    }
+
+    private void hideErrorText(){
+        if(tvInputError.getVisibility() == View.VISIBLE) {
+            boolean allValid = true;
+            if (!etAmount.isValid()) allValid = false;
+            if (!etCreditCard.isValid()) allValid = false;
+            if (!etExpiryDate.isValid()) allValid = false;
+            if (!etSecurityCode.isValid()) allValid = false;
+            if (!etCardName.isValid()) allValid = false;
+            if (allValid) tvInputError.setVisibility(View.GONE);
         }
     }
 
@@ -187,7 +201,6 @@ public class DonationActivity extends AppCompatActivity {
         intent.putExtra("donation-amount",etAmount.getAmount());
         startActivity(intent);
         finish();
-
     }
 
     private void showProgressSpinner(){
