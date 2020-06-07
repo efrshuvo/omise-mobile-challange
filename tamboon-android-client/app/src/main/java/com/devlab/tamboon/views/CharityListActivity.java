@@ -35,8 +35,8 @@ public class CharityListActivity extends AppCompatActivity {
     private TamboonRemoteRepository tamboonRemoteRepository;
     private ArrayList<Charity> charityList;
     // The Idling Resource which will be null in production.
-    @Nullable
-    private TamboonIdlingResource tamboonIdlingResource;
+//    @Nullable
+//    private TamboonIdlingResource tamboonIdlingResource;
 
     private ActivityCharityListBinding binding;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -53,6 +53,11 @@ public class CharityListActivity extends AppCompatActivity {
         initView();
         initViewModel();
         configureCharityListObserver();
+        charityListViewModel.requestingCharityList();
+//        if(tamboonIdlingResource != null){
+//            tamboonIdlingResource.setIdleState(true);
+//        }
+        TamboonIdlingResource.increment();
     }
 
     private void initView(){
@@ -62,6 +67,7 @@ public class CharityListActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 if(charityListViewModel != null) {
+                    //TamboonIdlingResource.increment();
                     charityListViewModel.requestingCharityList();
                 }
             }
@@ -94,7 +100,6 @@ public class CharityListActivity extends AppCompatActivity {
         tamboonRemoteRepository = new TamboonRemoteRepository(RetrofitService.getInstance());
         charityListViewModelFactory = new CharityListViewModelFactory(tamboonRemoteRepository);
         charityListViewModel = ViewModelProviders.of(this,charityListViewModelFactory).get(CharityListViewModel.class);
-        charityListViewModel.requestingCharityList();
     }
 
     private void configureCharityListObserver(){
@@ -107,6 +112,10 @@ public class CharityListActivity extends AppCompatActivity {
                 if(swipeRefreshLayout.isRefreshing()){
                     swipeRefreshLayout.setRefreshing(false);
                 }
+                if (!TamboonIdlingResource.getIdlingResource().isIdleNow()) {
+                    TamboonIdlingResource.decrement(); // Set app as idle.
+                }
+
             }else{
                 showLoadingErrorMessage(throwable);
             }
@@ -117,12 +126,12 @@ public class CharityListActivity extends AppCompatActivity {
         Toast.makeText(this,t.getMessage().toString(),Toast.LENGTH_LONG).show();
     }
 
-    @VisibleForTesting
-    @NonNull
-    public IdlingResource getIdlingResource() {
-        if (tamboonIdlingResource == null) {
-            tamboonIdlingResource = new TamboonIdlingResource();
-        }
-        return tamboonIdlingResource;
-    }
+//    @VisibleForTesting
+//    @NonNull
+//    public IdlingResource getIdlingResource() {
+//        if (tamboonIdlingResource == null) {
+//            tamboonIdlingResource = new TamboonIdlingResource();
+//        }
+//        return tamboonIdlingResource;
+//    }
 }
