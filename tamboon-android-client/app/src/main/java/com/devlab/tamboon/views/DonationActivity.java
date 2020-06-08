@@ -28,6 +28,7 @@ import com.devlab.tamboon.databinding.ActivityDonationBinding;
 import com.devlab.tamboon.factory.DonationViewModelFactory;
 import com.devlab.tamboon.network.RetrofitService;
 import com.devlab.tamboon.repositories.TamboonRemoteRepository;
+import com.devlab.tamboon.utility.TamboonIdlingResource;
 import com.devlab.tamboon.viewmodels.DonationViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -132,9 +133,12 @@ public class DonationActivity extends AppCompatActivity {
             }
             else //if not success
             {
+                if(donationResponse.getDonationResult().getMessage().toLowerCase().contains("amount")){
+                    updateEditTextErrorBackground(etAmount);
+                }
                 showMessage(donationResponse.getDonationResult().getMessage());
             }
-
+            TamboonIdlingResource.decrement();
         });
 
         donationViewModel.getThrowable().observe(this, throwable -> {
@@ -153,10 +157,10 @@ public class DonationActivity extends AppCompatActivity {
     }
 
     private void updateEditTextErrorBackground(OmiseEditText editText){
-        if(!editText.isValid()) {
+//        if(!editText.isValid()) {
             editText.setBackgroundResource(R.drawable.bg_error_field_outlined);
             tvInputError.setVisibility(View.VISIBLE);
-        }
+//        }
     }
 
     private void updateEditTextBackground(OmiseEditText editText){
@@ -183,6 +187,7 @@ public class DonationActivity extends AppCompatActivity {
 
     private void requestToGenerateToken(){
         if(tvInputError.getVisibility() == View.GONE){
+            TamboonIdlingResource.increment();
             showProgressSpinner();
             donationViewModel.generateToken(new CardParam(etCardName.getCardName(),
                     etCreditCard.getCardNumber(), etExpiryDate.getExpiryMonth(),
