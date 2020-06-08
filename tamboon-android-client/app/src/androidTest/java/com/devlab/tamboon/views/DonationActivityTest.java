@@ -31,7 +31,6 @@ import static com.devlab.tamboon.matchers.StyleMatchers.withTextViewTextColor;
 @RunWith(AndroidJUnit4ClassRunner.class)
 public class DonationActivityTest {
     private final int TEST_ITEM_NUMBER = 2;
-    private Charity charity;
 
     @Rule
     public ActivityScenarioRule<CharityListActivity> activityTestRule =
